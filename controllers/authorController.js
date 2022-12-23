@@ -2,6 +2,8 @@ const Author=require("../models/author");
 const Book=require("../models/book");
 const async=require("async");
 const {body,validationResult}=require("express-validator");
+
+const debug=require("debug")("author");
 //display list of all author
 exports.author_list=(req,res,next)=>{
     Author.find()
@@ -183,6 +185,7 @@ exports.author_delete_post=(req,res,next)=>{
 exports.author_update_get=(req,res,next)=>{
     Author.findById(req.params.id).exec((err,author)=>{
         if(err){
+            debug(`update error: ${err}`);
             return next(err);
         }
         res.render("author_form",{
