@@ -17,7 +17,10 @@ var app = express();
 app.use(helmet());
 //import the mongoose module
 const mongoose=require("mongoose");
-const mongoDB="mongodb+srv://yogenps48:FNHcFJtRTvWu9D2I@cluster0.fqn6gqm.mongodb.net/?retryWrites=true&w=majority";
+
+const dev_db_url="mongodb+srv://yogenps48:FNHcFJtRTvWu9D2I@cluster0.fqn6gqm.mongodb.net/?retryWrites=true&w=majority";
+
+const mongodb=process.env.MONGODB_URI||dev_db_url;
 mongoose.connect(mongoDB,{useNewUrlParser:true,useUnifiedTopology:true});
 const db=mongoose.connection;
 db.on("error",console.error.bind(console,"MongoDB connection error:"));
